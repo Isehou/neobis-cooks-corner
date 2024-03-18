@@ -1,0 +1,67 @@
+.side-header {
+  width: 100px;
+  height: 100vh;
+  position: fixed;
+  background-color: #ededed;
+  color: #fff;
+}
+.side-header-wrapper {
+  padding: 40px 20px;
+  box-sizing: border-box;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.side-header__divider {
+  border-bottom: 1px solid var(--grey-color);
+  margin-bottom: 30px;
+}
+
+.header-route-links {
+  margin-bottom: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 60px;
+  height: 60px;
+  border-radius: 10px;
+  background-color: #fff;
+  border: none;
+  outline: inherit;
+  cursor: pointer;
+}
+.header-route-links.active,
+.header-route-links:active {
+  background: var(--yellow-color);
+  transition: color 0.4s ease;
+}
+.internal-icons {
+  color: var(--grey-color);
+  width: 25px;
+  height: 25px;
+}
+.header-route-links.active .internal-icons {
+  color: #fff;
+  transition: color 0.4s ease;
+}
+.exit-route-links {
+  margin: 0;
+}
+.exit-icon {
+  color: var(--yellow-color);
+}
+.exit-route-links:active .exit-icon {
+  color: #fff;
+}
+
+/* animation: rotateAnimation 0.5s linear forwards;
+
+@keyframes rotateAnimation {
+  from {
+    transform: rotate(0deg); 
+  }
+  to {
+    transform: rotate(360deg); 
+  }
+} */

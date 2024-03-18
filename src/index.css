@@ -20,6 +20,8 @@ code {
 :root {
   --internal-padding: 120px 160px;
   --black-color: #141414;
+  --grey-color: #666666;
+  --yellow-color: #fa9e31;
   --white-color: #fff;
   --shadow: 10px 12px 29px -14px rgba(0, 0, 0, 0.75);
 }

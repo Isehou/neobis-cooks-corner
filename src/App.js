@@ -1,15 +1,15 @@
 import "./App.css";
 import React from "react";
-import { Routes, Route } from "react-router-dom";
+import AppRouter from "./AppRouter";
+import SideHeader from "./components/side-header/SideHeader";
 
 function App() {
   return (
     <div className="App">
-      <Routes>
-        <Route path="/"></Route>
-        <Route path="/"></Route>
-        <Route path="/"></Route>
-      </Routes>
+      <SideHeader />
+      <div className="pages-wrapper">
+        <AppRouter />
+      </div>
     </div>
   );
 }

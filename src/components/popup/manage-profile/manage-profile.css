@@ -1,0 +1,151 @@
+.validation {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.4);
+  transform: scale(0);
+}
+.validation.active {
+  transform: scale(1);
+}
+.validation-wrapper {
+  width: 560px;
+  border-radius: 48px;
+  text-align: left;
+  padding: 40px;
+  background-color: white;
+  border: none;
+}
+.validation-text-frame {
+  width: 100%;
+}
+.validation-text-frame h1 {
+  padding: 0;
+  margin: 0;
+}
+.validation-text-frame__title {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+}
+.close-button {
+  width: 36px;
+  height: 36px;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  font-size: 28px;
+  font-weight: 500;
+}
+.react-international-phone-input-container,
+.validation-input {
+  box-sizing: border-box;
+  width: 100%;
+  height: 64px;
+  padding: 0 20px;
+  align-items: center;
+  border-radius: 200px;
+  border: 1px solid var(--blue-color);
+  font-size: 18px;
+}
+.react-international-phone-input-container:focus,
+.validation-input:focus {
+  border: 1px solid var(--blue-darker-color);
+}
+.react-international-phone-country-selector-button__flag-emoji {
+  width: 24px;
+  height: 24px;
+}
+.react-international-phone-country-selector-button__dropdown-arrow {
+  margin-left: 10px;
+}
+.react-international-phone-country-selector-button {
+  padding-right: 10px;
+  border: none;
+}
+.react-international-phone-country-selector {
+  border: none;
+}
+.react-international-phone-input {
+  font-size: 18px !important;
+  border: none !important;
+  width: 100%;
+  height: 100% !important;
+  border-radius: 30px !important;
+}
+.react-international-phone-input::after {
+  content: "-";
+  position: absolute;
+  bottom: -10px; /* Располагаем тире снизу относительно ячейки */
+  left: 50%; /* Выравниваем тире по горизонтали */
+  transform: translateX(-50%);
+}
+.react-international-phone-flag-emoji
+  .react-international-phone-country-selector-button__flag-emoji {
+  width: 24px;
+  height: 24px;
+}
+.validation-people-preorder {
+  width: 245px;
+  height: 125px;
+  font-size: 16px;
+}
+.validation-people-preorder .alignment-block {
+  display: flex;
+  align-items: center;
+  width: 245px;
+  height: 48px;
+}
+.validation-people-preorder .block-grey {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 130px;
+  height: 48px;
+  background: #f3f3f3;
+  border-radius: 20px;
+}
+.validation-people-preorder__btn {
+  width: 42px;
+  height: 48px;
+  border-radius: 16px;
+  background: var(--blue-color);
+  border: none;
+  color: #fff;
+  font-size: 28px;
+  cursor: pointer;
+}
+.validation-subtitle {
+  color: #888;
+  font-size: 16px;
+}
+.validation-submit__btn {
+  display: flex;
+  width: 100%;
+  height: 64px;
+  padding: 13px 130px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 40px;
+  background: var(--blue-color);
+  color: #fff;
+  font-size: 24px;
+  font-weight: 500;
+  border: none;
+  transition-duration: 0.1s;
+  cursor: pointer;
+}
+.validation-submit__btn:active {
+  background: var(--blue-darker-color);
+}
+.validation-submit__btn:hover {
+  background: var(--blue-darker-color);
+}
