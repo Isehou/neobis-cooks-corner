@@ -5,7 +5,7 @@ import SavedRecipeList from "../../components/recipe-list/SavedRecipeList";
 
 function ProfilePage() {
   return (
-    <div>
+    <div className="out-wrapper">
       <h1>Profile</h1>
       <div className="profile-page-wrapper">
         <div className="profile-account-information">

@@ -13,7 +13,11 @@ function SideHeader() {
     <div className="side-header">
       <div className="side-header-wrapper">
         <div>
-          <Link className="header-route-links" to="/" preventScrollReset={true}>
+          <Link
+            className="header-route-links"
+            to="/sign-up"
+            preventScrollReset={true}
+          >
             <img className="internal-icons" src={logo} alt="logo" />
           </Link>
           <div className="side-header__divider"></div>
