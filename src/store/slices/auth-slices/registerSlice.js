@@ -6,14 +6,20 @@ export const registerUser = createAsyncThunk(
   "register/registerUser",
   async (userData, thunkAPI) => {
     try {
-      const response = await axios.post(`${MAIN_API}${REGISTER_API}`, userData);
+      const response = await axios.post(
+        `${MAIN_API}${REGISTER_API}`,
+        userData,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
 
       if (response.status !== 200) {
         throw new Error("Failed to register");
       }
-      const data = await response.json();
-      console.log("data", data);
-      return data;
+      return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }

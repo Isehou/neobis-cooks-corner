@@ -5,14 +5,15 @@ export const biographyPage = createAsyncThunk(
   "mypage/biographyPage",
   async (userData, thunkAPI) => {
     try {
-      const response = await axios.put(`${MAIN_API}${MY_PAGE_API}`, userData);
+      const authToken = localStorage.getItem("accessToken");
+      const response = await axios.put(`${MAIN_API}${MY_PAGE_API}`, userData, {
+        headers: { Authorization: `Bearer ${authToken}` },
+      });
 
       if (response.status !== 200) {
         throw new Error("Failed to update biography page");
       }
-      const data = response.data;
-      console.log("Biography page updated successfully", data);
-      return data;
+      return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }

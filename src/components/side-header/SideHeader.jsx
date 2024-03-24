@@ -1,5 +1,5 @@
 import React from "react";
-import { NavLink, Link } from "react-router-dom";
+import { NavLink, Link, useNavigate } from "react-router-dom";
 import "./side-header.css";
 import logo from "../../assets/skillet_cooktop.png";
 
@@ -7,8 +7,17 @@ import { IoSearch } from "react-icons/io5";
 import { FaHome } from "react-icons/fa";
 import { RxAvatar } from "react-icons/rx";
 import { RxExit } from "react-icons/rx";
+import { useDispatch } from "react-redux";
+import { logout } from "../../store/slices/auth-slices/loginSlice";
 
 function SideHeader() {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    navigate("/login");
+    dispatch(logout());
+  };
   return (
     <div className="side-header">
       <div className="side-header-wrapper">
@@ -41,13 +50,13 @@ function SideHeader() {
             </NavLink>
           </div>
         </div>
-        <Link
+        <button
           className="header-route-links exit-route-links"
-          to="/login"
+          onClick={handleLogout}
           // reventScrollReset={true}
         >
           <RxExit className="internal-icons exit-icon" />
-        </Link>
+        </button>
       </div>
     </div>
   );

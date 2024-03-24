@@ -1,6 +1,6 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import React, { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import { loginUser } from "../../store/slices/auth-slices/loginSlice";
 
 import * as yup from "yup";
@@ -13,7 +13,8 @@ import "./authorization-styles.css";
 function LoginPage() {
   const [showPassword, setShowPassword] = useState(false);
   const dispatch = useDispatch();
-
+  const isAuth = useSelector((state) => state.login.isAuth);
+  const navigate = useNavigate();
   const handleShowPassword = () => {
     setShowPassword(!showPassword);
   };
@@ -36,6 +37,12 @@ function LoginPage() {
     onSubmit,
   });
 
+  useEffect(() => {
+    if (isAuth) {
+      navigate("/");
+    }
+  }, [isAuth]);
+
   const isFormValid = () => {
     return (
       formik.values.email && !formik.errors.email && !formik.errors.password
@@ -46,7 +53,7 @@ function LoginPage() {
     <div className="auth-wrapper">
       <div className="head-wrapper">
         Welcome Back To <p>CooksCorner</p>
-        {JSON.stringify(formik.errors)}
+        {/* {JSON.stringify(formik.errors)} */}
       </div>
       <div className="auth__input__list-container">
         <div className="auth__input-container">
@@ -87,9 +94,9 @@ function LoginPage() {
               <FaEye className="pass-button__icon" />
             )}
           </button>
-          {/* {formik.errors.password ? (
+          {formik.errors.password ? (
             <div className="error-message">{formik.errors.password}</div>
-          ) : null} */}
+          ) : null}
         </div>
         <button
           className="sign-in__btn"

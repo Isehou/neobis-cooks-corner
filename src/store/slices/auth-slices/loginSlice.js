@@ -6,26 +6,35 @@ export const loginUser = createAsyncThunk(
   "login/loginUser",
   async (userData, thunkAPI) => {
     try {
-      const response = await axios.post(`${MAIN_API}${LOGIN_API}`, userData);
-
+      const response = await axios.post(`${MAIN_API}${LOGIN_API}`, userData, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
       if (response.status !== 200) {
-        throw new Error("Failed to login");
+        throw new Error("Failed to register");
       }
-      const data = await response.json();
-      console.log("login data", data);
-      return data;
+
+      return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }
   }
 );
+const initialState = {
+  loading: false,
+  error: null,
+  success: false,
+  isAuth: false,
+};
 
 const loginSlice = createSlice({
   name: "login",
-  initialState: {
-    loading: false,
-    error: null,
-    success: false,
+  initialState,
+  reducers: {
+    logout: (state) => {
+      state.isAuth = false;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -38,6 +47,7 @@ const loginSlice = createSlice({
         state.loading = false;
         state.error = null;
         state.success = true;
+        state.isAuth = true;
       })
       .addCase(loginUser.rejected, (state, action) => {
         state.loading = false;
@@ -47,4 +57,5 @@ const loginSlice = createSlice({
   },
 });
 
+export const { logout } = loginSlice.actions;
 export const loginReduce = loginSlice.reducer;

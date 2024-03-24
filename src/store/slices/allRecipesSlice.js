@@ -6,12 +6,14 @@ export const getAllRecipes = createAsyncThunk(
   "allRecipes/getAllRecipes",
   async (_, thunkAPI) => {
     try {
-      const response = await axios.get(`${MAIN_API}${ALL_RECIPE_API}`);
+      const authToken = localStorage.getItem("accessToken");
+      const response = await axios.get(`${MAIN_API}${ALL_RECIPE_API}`, {
+        headers: { Authorization: `Bearer ${authToken}` },
+      });
 
       if (response.status !== 200) {
         throw new Error("Failed to get All Recipes");
       }
-      console.log("data:", response);
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
