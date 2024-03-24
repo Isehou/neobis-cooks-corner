@@ -1,12 +1,29 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import avatar from "../../assets/avatar.jpg";
+import ManageProfile from "../../components/popup/manage-profile/ManageProfile";
 import "./profile-page.css";
-import SavedRecipeList from "../../components/recipe-list/SavedRecipeList";
+import "../main.css";
 
 function ProfilePage() {
+  const [isManageProfileOpen, setIsManageProfileOpen] = useState(false);
+  const [userName, setUserName] = useState("");
+  const [userDescription, setUserDescription] = useState("");
+  const [userPhoto, setUserPhoto] = useState();
+
+  useEffect(() => {
+    const savedName = localStorage.getItem("profileName");
+    const savedDescription = localStorage.getItem("profileDescription");
+    if (savedName) {
+      setUserName(savedName);
+    }
+    if (savedDescription) {
+      setUserDescription(savedDescription);
+    }
+  }, []);
+
   return (
     <div className="out-wrapper">
-      <h1>Profile</h1>
+      <h2>Profile</h2>
       <div className="profile-page-wrapper">
         <div className="profile-account-information">
           <div className="profile-avatar">
@@ -25,17 +42,24 @@ function ProfilePage() {
               </h4>
             </div>
             <div className="profile-text">
-              <h3>Gordon Ramsay</h3>
-              <p>
-                Gordon James Ramsay OBE is a British celebrity chef,
-                restaurateur, television presenter, and writer. His restaurant
-                group, Gordon Ramsay Restaurants, was founded in 1997 and has
-                been awarded 17 Michelin stars overall and currently holds
-                eight.
-              </p>
+              <h3 className="profile-text__name">{userName}</h3>
+              <p className="profile-text__description">{userDescription}</p>
             </div>
             <div className="profile-setting">
-              <button className="profile-setting-btn">Profile Manage</button>
+              <button
+                className="profile-setting-btn"
+                onClick={() => setIsManageProfileOpen(true)}
+              >
+                Manage Profile
+              </button>
+              <ManageProfile
+                userName={userName}
+                setUserName={setUserName}
+                userDescription={userDescription}
+                setUserDescription={setUserDescription}
+                isManageProfileOpen={isManageProfileOpen}
+                setIsManageProfileOpen={setIsManageProfileOpen}
+              />
             </div>
           </div>
         </div>
@@ -46,9 +70,7 @@ function ProfilePage() {
           <span>My recipe</span>
           <h4>Saved recipe</h4>
         </div>
-        <div className="profile-saved-recipe-recipes__container">
-          <SavedRecipeList />
-        </div>
+        <div className="profile-saved-recipe-recipes__container"></div>
       </div>
     </div>
   );

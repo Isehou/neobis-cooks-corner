@@ -1,10 +1,15 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { allMealReducer } from "./temp-slices/allMealSlice";
-import { detailsMealReducer } from "./temp-slices/detailsMealSlice";
+
+import { emailVerificationReduce } from "./slices/auth-slices/emailVerificationSlice";
+import { loginReduce } from "./slices/auth-slices/loginSlice";
+import { registerReduce } from "./slices/auth-slices/registerSlice";
+import { allRecipesReduce } from "./slices/allRecipesSlice";
 
 export const store = configureStore({
   reducer: {
-    allMeal: allMealReducer,
-    detailsMeal: detailsMealReducer,
+    emailVerification: emailVerificationReduce,
+    login: loginReduce,
+    register: registerReduce,
+    allRecipes: allRecipesReduce,
   },
 });

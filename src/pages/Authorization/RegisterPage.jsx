@@ -5,12 +5,22 @@ import * as yup from "yup";
 import { validationSchema } from "../../helpers/validationSchema";
 import { FaEye } from "react-icons/fa"; // eye-icon active
 import { FaEyeSlash } from "react-icons/fa"; // eye-icon hidden
+import { SiMaildotru } from "react-icons/si";
+import { IoMdPerson } from "react-icons/io";
+import { useSelector, useDispatch } from "react-redux";
+import { verifyEmail } from "../../store/slices/auth-slices/emailVerificationSlice";
+import { registerUser } from "../../store/slices/auth-slices/registerSlice";
 
 import "./authorization-styles.css";
 
-function SignUpPage() {
+function RegisterPage() {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
+  const dispatch = useDispatch();
+  const loading = useSelector((state) => state.emailVerification.loading);
+  const error = useSelector((state) => state.emailVerification.error);
+  const success = useSelector((state) => state.emailVerification.success);
 
   const handleShowPassword = () => {
     setShowPassword(!showPassword);
@@ -20,10 +30,12 @@ function SignUpPage() {
   };
 
   const onSubmit = async (values, actions) => {
-    console.log(values);
-    console.log(actions);
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-    actions.resetForm();
+    try {
+      await dispatch(registerUser(values));
+      actions.resetForm();
+    } catch (error) {
+      console.error("Failed to login:", error);
+    }
   };
 
   const formik = useFormik({
@@ -31,7 +43,7 @@ function SignUpPage() {
       email: "",
       username: "",
       password: "",
-      confirmPassword: "",
+      password_confirm: "",
     },
     validationSchema,
     onSubmit,
@@ -50,6 +62,8 @@ function SignUpPage() {
 
   return (
     <div className="auth-wrapper">
+      {loading && <p>Загрузка...</p>}
+      {error && <p>Ошибка: {error}</p>}
       <div className="head-wrapper">
         Sign up for delicious <p>Discoveries!</p>
       </div>
@@ -64,6 +78,9 @@ function SignUpPage() {
             value={formik.values.username}
             placeholder="Enter your name"
           />
+          <button className="pass-button" type="button">
+            <IoMdPerson className="pass-button__icon button-icon" />
+          </button>
           {formik.errors.username ? (
             <div className="error-message">{formik.errors.username}</div>
           ) : null}
@@ -79,6 +96,9 @@ function SignUpPage() {
             value={formik.values.email}
             placeholder="Enter your email"
           />
+          <button className="pass-button" type="button">
+            <SiMaildotru className="pass-button__icon button-icon" />
+          </button>
           {formik.errors.email ? (
             <div className="error-message">{formik.errors.email}</div>
           ) : null}
@@ -139,13 +159,17 @@ function SignUpPage() {
             <div className="error-message">{formik.errors.confirmPassword}</div>
           ) : null}
         </div>
-        <button className="sign-up__btn" type="button">
-          Sign In
+        <button
+          className="sign-up__btn"
+          type="submit"
+          onClick={formik.handleSubmit}
+        >
+          Sign Up
         </button>
       </div>
       <div className="any-account__link-wrapper">
         Alredy have an account?
-        <Link Link to="/sign-in">
+        <Link Link to="/login">
           Sign In Now
         </Link>
       </div>
@@ -153,4 +177,4 @@ function SignUpPage() {
   );
 }
 
-export default SignUpPage;
+export default RegisterPage;

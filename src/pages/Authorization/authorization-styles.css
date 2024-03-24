@@ -38,7 +38,7 @@
 .error-message {
   position: absolute;
   right: 0;
-  top: 70px;
+  top: 75px;
   font-size: 9pt;
   color: red;
   font-weight: 300;
@@ -68,6 +68,7 @@
   background: none;
   border: none;
 }
+
 .pass-button__icon {
   /* position: absolute; */
   width: 20px;
@@ -75,6 +76,9 @@
   top: 0;
   right: 0;
   color: #8a8a8a;
+}
+.button-icon {
+  cursor: auto;
 }
 .sign-in__btn,
 .sign-up__btn {

@@ -13,11 +13,7 @@ function SideHeader() {
     <div className="side-header">
       <div className="side-header-wrapper">
         <div>
-          <Link
-            className="header-route-links"
-            to="/sign-up"
-            preventScrollReset={true}
-          >
+          <Link className="header-route-links" preventScrollReset={true}>
             <img className="internal-icons" src={logo} alt="logo" />
           </Link>
           <div className="side-header__divider"></div>
@@ -47,6 +43,7 @@ function SideHeader() {
         </div>
         <Link
           className="header-route-links exit-route-links"
+          to="/login"
           // reventScrollReset={true}
         >
           <RxExit className="internal-icons exit-icon" />

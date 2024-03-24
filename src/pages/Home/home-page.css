@@ -1,0 +1,40 @@
+.homepage {
+  text-align: left;
+}
+.homepage-category-list {
+  display: flex;
+  padding: 0;
+  margin: 0;
+}
+.homepage-category-item {
+  list-style: none;
+  position: relative;
+
+  margin-right: 30px;
+  display: inline-block;
+  cursor: pointer;
+}
+.homepage-category-item:after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -2px; /* Измените толщину при необходимости */
+  width: 50%;
+  height: 1px; /* Измените толщину при необходимости */
+  background-image: linear-gradient(to right, black 50%, transparent 50%);
+  background-size: 200% 100%;
+  background-position: 100% 0;
+  transition: background-position 0.5s;
+}
+.homepage-category-item:hover::after {
+  background-position: 0 0;
+}
+
+/* meal photo content */
+
+.homepage-meal__content {
+  margin-top: 20px;
+  border: 1px solid red;
+  width: 100%;
+  height: 100vh;
+}

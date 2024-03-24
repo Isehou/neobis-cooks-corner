@@ -1,31 +1,38 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { useFormik } from "formik";
+import { useDispatch } from "react-redux";
+import { loginUser } from "../../store/slices/auth-slices/loginSlice";
+
 import * as yup from "yup";
-import { validationSchema } from "../../helpers/validationSchema";
-import { FaEye } from "react-icons/fa"; // eye-icon active
-import { FaEyeSlash } from "react-icons/fa"; // eye-icon hidden
+import { useFormik } from "formik";
+import { signInSchema } from "../../helpers/signInSchema";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 import "./authorization-styles.css";
 
-function SignInPage() {
+function LoginPage() {
   const [showPassword, setShowPassword] = useState(false);
+  const dispatch = useDispatch();
+
   const handleShowPassword = () => {
     setShowPassword(!showPassword);
   };
+
   const onSubmit = async (values, actions) => {
-    console.log(values);
-    console.log(actions);
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-    actions.resetForm();
+    try {
+      await dispatch(loginUser(values));
+      actions.resetForm();
+    } catch (error) {
+      console.error("Failed to login:", error);
+    }
   };
 
   const formik = useFormik({
     initialValues: {
-      email: "",
-      password: "",
+      email: "zaku47shift@gmail.com",
+      password: "12345Qq#",
     },
-    validationSchema,
+    validationSchema: signInSchema,
     onSubmit,
   });
 
@@ -39,6 +46,7 @@ function SignInPage() {
     <div className="auth-wrapper">
       <div className="head-wrapper">
         Welcome Back To <p>CooksCorner</p>
+        {JSON.stringify(formik.errors)}
       </div>
       <div className="auth__input__list-container">
         <div className="auth__input-container">
@@ -79,19 +87,23 @@ function SignInPage() {
               <FaEye className="pass-button__icon" />
             )}
           </button>
-          {formik.errors.password ? (
+          {/* {formik.errors.password ? (
             <div className="error-message">{formik.errors.password}</div>
-          ) : null}
+          ) : null} */}
         </div>
-        <button className="sign-in__btn" type="button">
+        <button
+          className="sign-in__btn"
+          type="submit"
+          onClick={formik.handleSubmit}
+        >
           Sign In
         </button>
       </div>
       <div className="any-account__link-wrapper">
-        i don't have an account? <Link to="/sign-up">Sign Up Now</Link>
+        i don't have an account? <Link to="/register">Sign Up Now</Link>
       </div>
     </div>
   );
 }
 
-export default SignInPage;
+export default LoginPage;
