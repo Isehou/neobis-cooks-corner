@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import debounce from "lodash/debounce";
 import "../main.css";
 import "./search-page.css";
 import { IoIosSearch } from "react-icons/io";
@@ -7,10 +8,24 @@ import CreateRecipe from "../../components/popup/create-recipe/CreateRecipe";
 
 function SearchPage() {
   const [activeButton, setActiveButton] = useState("recipes");
+  const [searchText, setSearchText] = useState("");
   const [createRecipeModalOpen, setCreateRecipeModalOpen] = useState(false);
+
+  let timeout;
 
   const handleButtonClick = (category) => {
     setActiveButton(category);
+  };
+
+  const handleSearchChange = (event) => {
+    clearTimeout(timeout);
+
+    const text = event.target.value;
+    setSearchText(text);
+
+    timeout = setTimeout(() => {
+      console.log("Search text:", text);
+    }, 500);
   };
 
   return (
@@ -44,6 +59,7 @@ function SearchPage() {
               placeholder={
                 activeButton === "chefs" ? "Search chefs" : "Search recipes"
               }
+              onChange={handleSearchChange}
             />
             <IoIosSearch className="search-input__icon" />
           </div>

@@ -3,9 +3,8 @@ import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { loginUser } from "../../store/slices/auth-slices/loginSlice";
 
-import * as yup from "yup";
 import { useFormik } from "formik";
-import { signInSchema } from "../../helpers/signInSchema";
+import { loginSchema } from "../../helpers/loginSchema";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 import "./authorization-styles.css";
@@ -30,10 +29,10 @@ function LoginPage() {
 
   const formik = useFormik({
     initialValues: {
-      email: "zaku47shift@gmail.com",
-      password: "12345Qq#",
+      email: "taihou_i@mail.ru",
+      password: "12345678Qq#",
     },
-    validationSchema: signInSchema,
+    validationSchema: loginSchema,
     onSubmit,
   });
 
@@ -53,7 +52,6 @@ function LoginPage() {
     <div className="auth-wrapper">
       <div className="head-wrapper">
         Welcome Back To <p>CooksCorner</p>
-        {/* {JSON.stringify(formik.errors)} */}
       </div>
       <div className="auth__input__list-container">
         <div className="auth__input-container">
@@ -102,12 +100,22 @@ function LoginPage() {
           className="sign-in__btn"
           type="submit"
           onClick={formik.handleSubmit}
+          disabled={!isFormValid() || formik.isSubmitting}
         >
           Sign In
         </button>
       </div>
       <div className="any-account__link-wrapper">
-        i don't have an account? <Link to="/register">Sign Up Now</Link>
+        i don't have an account?{" "}
+        <Link to="/register" className="bold-weight">
+          Sign Up Now
+        </Link>
+      </div>
+
+      <div className="any-account__link-wrapper">
+        <Link to="/" className="bold-weight">
+          Go to Home page
+        </Link>
       </div>
     </div>
   );

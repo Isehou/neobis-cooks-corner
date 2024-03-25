@@ -1,8 +1,7 @@
 import * as yup from "yup";
 
-export const validationSchema = yup.object({
+export const loginSchema = yup.object({
   email: yup.string().email("Correct your email").required("Required"),
-  username: yup.string().required("Required"),
   password: yup
     .string()
     .required("Required")
@@ -11,9 +10,4 @@ export const validationSchema = yup.object({
     .matches(/[a-zA-Z]/, "Lowercase and uppercase letters")
     .matches(/\d/, "Minimum 1 digit")
     .matches(/[!@#$%^&*(),.?":{}|<>]/, "Minimum 1 special character"),
-
-  password_confirm: yup
-    .string()
-    .oneOf([yup.ref("password"), null], "Passwords must match")
-    .required("Confirm password"),
 });

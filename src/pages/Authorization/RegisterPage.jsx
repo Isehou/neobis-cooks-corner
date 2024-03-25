@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useFormik } from "formik";
-import * as yup from "yup";
 import { validationSchema } from "../../helpers/validationSchema";
 import { FaEye } from "react-icons/fa"; // eye-icon active
 import { FaEyeSlash } from "react-icons/fa"; // eye-icon hidden
@@ -61,7 +60,7 @@ function RegisterPage() {
   };
 
   return (
-    <div className="auth-wrapper">
+    <form className="auth-wrapper">
       {loading && <p>Загрузка...</p>}
       {error && <p>Ошибка: {error}</p>}
       <div className="head-wrapper">
@@ -78,7 +77,7 @@ function RegisterPage() {
             value={formik.values.username}
             placeholder="Enter your name"
           />
-          <button className="pass-button" type="button">
+          <button className="pass-button none-select" type="button" disabled>
             <IoMdPerson className="pass-button__icon button-icon" />
           </button>
           {formik.errors.username ? (
@@ -96,8 +95,8 @@ function RegisterPage() {
             value={formik.values.email}
             placeholder="Enter your email"
           />
-          <button className="pass-button" type="button">
-            <SiMaildotru className="pass-button__icon button-icon" />
+          <button className="pass-button none-select" type="button" disabled>
+            <SiMaildotru className="pass-button__icon button-icon " />
           </button>
           {formik.errors.email ? (
             <div className="error-message">{formik.errors.email}</div>
@@ -117,7 +116,7 @@ function RegisterPage() {
             placeholder="Enter your password"
           />
           <button
-            className="pass-button"
+            className="pass-button none-select"
             type="button"
             onClick={handleShowPassword}
           >
@@ -136,16 +135,16 @@ function RegisterPage() {
           <span>Re-password</span>
           <input
             className="input-style password-btn"
-            name="confirmPassword"
-            id="confirmPassword"
+            name="password_confirm"
+            id="password_confirm"
             type={showConfirmPassword ? "text" : "password"}
-            value={formik.values.confirmPassword}
+            value={formik.values.password_confirm}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             placeholder="Re-enter your paswword"
           />
           <button
-            className="pass-button"
+            className="pass-button none-select"
             type="button"
             onClick={handleShowConfirmPassword}
           >
@@ -163,17 +162,18 @@ function RegisterPage() {
           className="sign-up__btn"
           type="submit"
           onClick={formik.handleSubmit}
+          disabled={!isFormValid() || formik.isSubmitting}
         >
           Sign Up
         </button>
       </div>
       <div className="any-account__link-wrapper">
         Alredy have an account?
-        <Link Link to="/login">
+        <Link to="/login" className="bold-weight">
           Sign In Now
         </Link>
       </div>
-    </div>
+    </form>
   );
 }
 
