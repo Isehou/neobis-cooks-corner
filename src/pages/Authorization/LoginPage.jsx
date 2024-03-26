@@ -79,7 +79,7 @@ function LoginPage() {
             value={formik.values.password}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
-            placeholder="Create password"
+            placeholder="Enter password"
           />
           <button
             className="pass-button"

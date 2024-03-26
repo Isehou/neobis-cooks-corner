@@ -14,6 +14,7 @@ export const getAllRecipes = createAsyncThunk(
       if (response.status !== 200) {
         throw new Error("Failed to get All Recipes");
       }
+      console.log("response.data", response.data);
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -21,21 +22,26 @@ export const getAllRecipes = createAsyncThunk(
   }
 );
 
+const initialState = {
+  recipes: [],
+  loading: false,
+  error: null,
+  success: false,
+};
+
 const allRecipesSlice = createSlice({
   name: "allRecipes",
-  initialState: {
-    loading: false,
-    error: null,
-    success: false,
-  },
+  initialState,
   extraReducers: (builder) => {
     builder
       .addCase(getAllRecipes.pending, (state) => {
+        state.recipes = [];
         state.loading = true;
         state.error = null;
         state.success = false;
       })
-      .addCase(getAllRecipes.fulfilled, (state) => {
+      .addCase(getAllRecipes.fulfilled, (state, action) => {
+        state.recipes = action.payload;
         state.loading = false;
         state.error = null;
         state.success = true;
@@ -48,4 +54,4 @@ const allRecipesSlice = createSlice({
   },
 });
 
-export const allRecipesReduce = allRecipesSlice.reducer;
+export const allRecipesReducer = allRecipesSlice.reducer;
