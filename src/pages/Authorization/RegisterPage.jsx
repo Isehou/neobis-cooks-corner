@@ -54,8 +54,8 @@ function RegisterPage() {
       !formik.errors.email &&
       !formik.errors.username &&
       !formik.errors.password &&
-      !formik.errors.confirmPassword &&
-      formik.values.password === formik.values.confirmPassword
+      !formik.errors.password_confirm &&
+      formik.values.password === formik.values.password_confirm
     );
   };
 
@@ -154,8 +154,10 @@ function RegisterPage() {
               <FaEye className="pass-button__icon" />
             )}
           </button>
-          {formik.errors.confirmPassword && formik.touched.confirmPassword ? (
-            <div className="error-message">{formik.errors.confirmPassword}</div>
+          {formik.errors.password_confirm && formik.touched.password_confirm ? (
+            <div className="error-message">
+              {formik.errors.password_confirm}
+            </div>
           ) : null}
         </div>
         <button

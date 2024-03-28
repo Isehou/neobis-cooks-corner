@@ -5,27 +5,27 @@ import "./search-page.css";
 import { IoIosSearch } from "react-icons/io";
 import { FaCirclePlus } from "react-icons/fa6";
 import CreateRecipe from "../../components/popup/create-recipe/CreateRecipe";
+import fetchSearchResult from "../../services/fetchSearchResult";
 
 function SearchPage() {
   const [activeButton, setActiveButton] = useState("recipes");
   const [searchText, setSearchText] = useState("");
   const [createRecipeModalOpen, setCreateRecipeModalOpen] = useState(false);
-
-  let timeout;
+  let timer;
 
   const handleButtonClick = (category) => {
     setActiveButton(category);
   };
 
-  const handleSearchChange = (event) => {
-    clearTimeout(timeout);
-
+  const handleSearchChange = async (event) => {
     const text = event.target.value;
     setSearchText(text);
-
-    timeout = setTimeout(() => {
-      console.log("Search text:", text);
-    }, 500);
+    try {
+      const results = await fetchSearchResult(text);
+      console.log("Search results:", results);
+    } catch (error) {
+      console.error("Error results:", error);
+    }
   };
 
   return (
@@ -59,6 +59,7 @@ function SearchPage() {
               placeholder={
                 activeButton === "chefs" ? "Search chefs" : "Search recipes"
               }
+              value={searchText}
               onChange={handleSearchChange}
             />
             <IoIosSearch className="search-input__icon" />

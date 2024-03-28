@@ -7,9 +7,11 @@ export const authMiddleware = (store) => (next) => (action) => {
     const authToken = action.payload.token.access;
     localStorage.setItem("accessToken", authToken);
     console.log("middleware", action.payload);
+    console.log(authToken);
   }
   if (action.type === logout.type) {
     localStorage.removeItem("accessToken");
   }
+
   return result;
 };

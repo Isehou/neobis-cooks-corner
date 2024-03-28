@@ -25,8 +25,6 @@ function HomePage() {
     dispatch(getAllRecipes());
   }, [dispatch]);
 
-  // решить вопрос с получением пустого массива
-
   return (
     <div className="out-wrapper">
       <h2>Hi, Gordon Ramsay</h2>

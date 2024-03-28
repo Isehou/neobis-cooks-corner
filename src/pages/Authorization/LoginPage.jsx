@@ -29,8 +29,8 @@ function LoginPage() {
 
   const formik = useFormik({
     initialValues: {
-      email: "taihou_i@mail.ru",
-      password: "12345678Qq#",
+      email: "",
+      password: "",
     },
     validationSchema: loginSchema,
     onSubmit,
